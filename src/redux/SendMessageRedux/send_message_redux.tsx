@@ -22,15 +22,13 @@ export const actions = {
     ({ type: "SET_IS_SUCCESS", payload: data } as const),
 };
 
-//delete Portfolio
+//
 export const sendMessage =
   (name: string, email: string, message: string): ThunkType =>
   async (dispatch) => {
     try {
-      const data = await sendMessageAPI.sendMessageDB(name, email, message);
-      if (data.status === 200) {
-        dispatch(actions.setIsSuccess(true));
-      }
+      await sendMessageAPI.sendMessageDB(name, email, message);
+      dispatch(actions.setIsSuccess(true));
     } catch (err) {
       console.log(err);
       dispatch(actions.setIsSuccess(false));

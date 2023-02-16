@@ -19,3 +19,10 @@ body, html {
 .overflow__hidden{
   overflow: hidden;
 }
+.not__valid{
+  color: #e91e63;
+  text-align: right;
+}
+.success__message{
+  color: blue;
+}
