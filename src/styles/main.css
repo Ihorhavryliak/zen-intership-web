@@ -1,0 +1,21 @@
+@font-face {
+  font-family: "IBM Plex Sans Arabic";
+  src: url("../assets/fonts/IBMPlexSansArabic-Regular.ttf") format("woff2"),
+  url("../assets/fonts/IBMPlexSansArabic-Bold.ttf") format("woff2"),
+  ;
+  font-weight: bold;
+  font-display: swap;
+}
+body, html {
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
+    margin: 0;
+}
+
+.container{
+  margin: auto;
+  width: 1440px;
+  display: flex;
+}
+.overflow__hidden{
+  overflow: hidden;
+}

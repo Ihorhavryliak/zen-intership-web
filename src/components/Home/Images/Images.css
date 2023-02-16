@@ -1,0 +1,84 @@
+/* images */
+.position__relative{
+  position: relative;
+}
+.position__absolute{
+  position: absolute;
+}
+.container__img__left{
+  top: 40px;
+  left: 45px;
+}
+.container__img__right{
+  top: 20px;
+  right: 640px;
+}
+.container__img__right{
+  top: 20px;
+  right: 640px;
+}
+.container__img__cloud{
+  top: 102px;
+  right: 446px;
+}
+.container__img__center{
+  top: 517px;
+  right: 550px;
+  z-index: 3;
+}
+.container__img__pink{
+  bottom: 115px;
+  right: 392px;
+  z-index: 2;
+  width: 275px;
+}
+.container__img__word{
+  top: 0;
+  right: 0px;
+  z-index: 1;
+  width: 630px;
+}
+.container__img__cloud__small{
+  top: 132px;
+  left: 617px;
+  width: 132px;
+}
+.container__img__cloud__under{
+  top: 256px;
+  left: 694px;
+  width: 130px;
+  z-index: 0;
+}
+.z__index__6{
+  z-index: 6;
+}
+.container__img__cloud__bottom{
+  bottom: 140px;
+  left: 345px;
+  width: 218px;
+  z-index: 0;
+}
+.container__img__cloud__next{
+  width: 170px;
+  top: 745px;
+  right: 540px;
+  z-index: 0;
+}
+.container__img__cloud__one{
+  height: 216px;
+  top: 760px;
+  left: 138px;
+  z-index: 0;
+}
+.container__img__cloud__two{
+  width: 218px;
+  top: 400px;
+  right: 1314px;
+  z-index: 0;
+}
+.container__img__cloud__tree{
+  width: 218px;
+  top: 185px;
+  right: 1264px;
+  z-index: 0;
+}
