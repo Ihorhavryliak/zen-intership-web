@@ -22,15 +22,14 @@
   right: 446px;
 }
 .container__img__center{
-  top: 517px;
+  top: 520px;
   right: 550px;
   z-index: 3;
 }
 .container__img__pink{
-  bottom: 115px;
+  bottom: 114px;
   right: 392px;
   z-index: 2;
-  width: 275px;
 }
 .container__img__word{
   top: 0;
