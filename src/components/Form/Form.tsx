@@ -54,7 +54,7 @@ export const Form = () => {
           <div>
             <textarea
               className="input textarea__height"
-              placeholder="Your e-mail*"
+              placeholder="Your message*"
               value={message}
               onChange={(e) => setMessage(e.target.value)}
             />
