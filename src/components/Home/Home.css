@@ -4,38 +4,14 @@
   color: #000000;
   margin-bottom: 30px;
 }
-.row{
-  padding: 185px 0 172px 150px;
-}
-.input{
-  box-sizing: border-box;
-  width: 557px;
-  height: 93px;
-  background: #FFFFFF;
-  border: 1px solid #DCDCDC;
-  border-radius: 10px;
-  margin-bottom: 8px;
-  padding: 1px 0 0 46px;
-  font-family: 'Apercu Arabic Pro';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 18px;
-  color: #2D2D2D;
-}
-::placeholder { 
-  color: #2D2D2D;
-  opacity: 1; 
-}
 
-.textarea__height{
-  height: 189px;
-  padding-top: 31px;
-}
+
+
 
 .btn{
 width: 218px;
-height: 73px;
-background: #FAD34F;
+height: 40px;
+background: #4fbbfa;
 border-radius: 500px;
 border: 0;
 font-family: 'Apercu Arabic Pro';
@@ -48,4 +24,11 @@ cursor: pointer;
 }
 .btn:hover{
  opacity: 0.9;
+}
+/* //message */
+.block__message{
+  min-height: 100px;
+  background-color: #eee;
+  margin-bottom: 15px;
+  border-radius: 4px;
 }

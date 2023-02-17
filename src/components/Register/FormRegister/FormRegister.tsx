@@ -2,52 +2,39 @@ import { useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux/es/exports";
-import { GetAllMessageAPIType } from "../../api/send_message_api";
-import { sendMessage } from "../../redux/SendMessageRedux/send_message_redux";
-import { getIsSuccessMessage } from "../../redux/SendMessageRedux/send_message_selector";
-import { AppDispatch } from "../../redux/store";
+import { AppDispatch } from "../../../redux/store";
 
-type FormType = {};
-export const Form = (props: FormType) => {
+
+type FormRegister = {};
+export const FormRegister = (props: FormRegister) => {
   const dispatch: AppDispatch = useDispatch();
-  const isSuccessSend = useSelector(getIsSuccessMessage);
+  //const isSuccessSend = useSelector(getIsSuccessMessage);
 
   const initialRef: any = null;
   const captchaRef = useRef(initialRef);
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [homePage, setHomePage] = useState("");
-  const [message, setMessage] = useState("");
-  const [validation, setValidation] = useState("");
+  const [password, setPassword] = useState("");
 
+  const [validation, setValidation] = useState("");
   const [isVerificationToken, setIsVerificationToken] = useState(false);
 
-  const onSendToken = (value: any) => {
-    /* check */
-    if (value) {
-      setIsVerificationToken(true);
-      setValidation("");
-    }
-    value.preventDefault();
-  };
   // SendMessage
   const onSendMessage = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     /* check */
-    if (name.length === 0 || email.length === 0 || message.length === 0) {
+    if (name.length === 0 || email.length === 0 ) {
       return setValidation("All field require");
     }
     captchaRef.current.reset();
     if (isVerificationToken === false) {
       return setValidation("Confirm the captcha");
     }
-    dispatch(sendMessage(name, email, message, homePage));
+    //dispatch(sendMessage(name, email, message, homePage));
     /* clean */
     setName("");
     setEmail("");
-    setHomePage("");
-    setMessage("");
     setValidation("");
     setIsVerificationToken(false);
   };
@@ -55,7 +42,7 @@ export const Form = (props: FormType) => {
   return (
     <>
       <form onSubmit={onSendMessage} className="z__index__6 position__relative">
-        <h1 className="h1__bold">Leave a message</h1>
+        <h1 className="h1__bold">Sghn-up</h1>
         {/*     name */}
         <div>
           <input
@@ -76,41 +63,25 @@ export const Form = (props: FormType) => {
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-        {/* home page */}
-        <div>
+          {/* password */}
+          <div>
           <input
-            type="text"
+            type="password"
             className="input"
-            placeholder="Home page"
+            placeholder="Your password*"
             value={email}
-            onChange={(e) => setHomePage(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        {/* message */}
-        <div>
-          <textarea
-            className="textarea__height"
-            placeholder="Your message*"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-          />
-        </div>
+      {/*   validation */}
         {validation.length > 0 && (
           <div className="not__valid">{validation}</div>
         )}
-        {isSuccessSend === false && (
+      {/*   {isSuccessSend === false && (
           <div className="not__valid">An error occurred, try again please</div>
-        )}
-        {/*    reCAPTCHA */}
-
-        <ReCAPTCHA
-          ref={captchaRef}
-          sitekey={"6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"}
-          onChange={onSendToken}
-        />
-
+        )} */}
         {/* button */}
-        <div >
+        <div>
           <button className="btn">Send message</button>
         </div>
       </form>

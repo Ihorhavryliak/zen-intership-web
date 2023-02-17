@@ -1,28 +1,40 @@
-@font-face {
-  font-family: "IBM Plex Sans Arabic";
-  src: url("../assets/fonts/IBMPlexSansArabic-Regular.ttf") format("woff2"),
-  url("../assets/fonts/IBMPlexSansArabic-Bold.ttf") format("woff2"),
-  ;
-  font-weight: bold;
-  font-display: swap;
-}
-body, html {
-  font-family: 'IBM Plex Sans Arabic', sans-serif;
-    margin: 0;
-}
 
+body, html {
+    margin: 0;
+    background-color: rgb(133, 133, 133);
+}
 .container{
   margin: auto;
-  width: 1440px;
-  display: flex;
+  width: 900px;
 }
 .overflow__hidden{
   overflow: hidden;
 }
-.not__valid{
-  color: #e91e63;
-  text-align: right;
+.d-flex{
+  display: flex;
 }
-.success__message{
-  color: #198754
+.justify-between{
+  justify-content: space-between;
+}
+.header{
+  padding: 20px 0;
+  font-size: 2rem;
+}
+.input{
+  box-sizing: border-box;
+  min-height: 40px;
+  width: 450px;
+  border: 1px solid #DCDCDC;
+  border-radius: 4px;
+  margin-bottom: 14px;
+  padding: 0 0 0 15px;
+}
+.textarea__height{
+  box-sizing: border-box;
+  width: 450px;
+  min-height: 120px;
+  border: 1px solid #DCDCDC;
+  border-radius: 4px;
+  margin-bottom: 14px;
+  padding: 15px 0 0 15px;
 }
