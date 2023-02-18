@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux/es/exports";
+import { onRegistration } from "../../../redux/AuthReducer/Auth_reducer";
 import { AppDispatch } from "../../../redux/store";
 
 
@@ -13,12 +14,11 @@ export const FormRegister = (props: FormRegister) => {
   const initialRef: any = null;
   const captchaRef = useRef(initialRef);
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  const [validation, setValidation] = useState("");
-  const [isVerificationToken, setIsVerificationToken] = useState(false);
+  const [validation, setValidation] = useState('');
 
   // SendMessage
   const onSendMessage = (e: React.FormEvent<HTMLFormElement>) => {
@@ -27,22 +27,18 @@ export const FormRegister = (props: FormRegister) => {
     if (name.length === 0 || email.length === 0 ) {
       return setValidation("All field require");
     }
-    captchaRef.current.reset();
-    if (isVerificationToken === false) {
-      return setValidation("Confirm the captcha");
-    }
-    //dispatch(sendMessage(name, email, message, homePage));
+    dispatch(onRegistration(name, email, password));
     /* clean */
-    setName("");
-    setEmail("");
-    setValidation("");
-    setIsVerificationToken(false);
+    setName('');
+    setEmail('');
+    setPassword('')
+    setValidation('');
   };
-  //-----
+  //-----//
   return (
     <>
       <form onSubmit={onSendMessage} className="z__index__6 position__relative">
-        <h1 className="h1__bold">Sghn-up</h1>
+        <h1 className="h1__bold">Sign-up</h1>
         {/*     name */}
         <div>
           <input

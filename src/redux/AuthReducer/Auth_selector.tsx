@@ -1,10 +1,10 @@
 import { AppStateType } from "../store";
 
 export const getIsSuccessMessage = (state: AppStateType) => {
-  return state.messageReducer.isSuccess;
+  return state.authReducer.isSuccess;
 };
 
 export const getAllMessageDataSelector = (state: AppStateType) => {
-  return state.messageReducer.messages;
+  return state.authReducer.messages;
 };
 

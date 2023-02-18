@@ -4,10 +4,6 @@
   color: #000000;
   margin-bottom: 30px;
 }
-
-
-
-
 .btn{
 width: 218px;
 height: 40px;
@@ -31,4 +27,30 @@ cursor: pointer;
   background-color: #eee;
   margin-bottom: 15px;
   border-radius: 4px;
+  padding: 25px 20px;
+}
+/* header */
+.img__user{
+  width: 30px;
+  border-radius: 50px;
+  margin-right: 2px;
+}
+.img__added{
+  max-width: 50px;
+  border-radius: 4px;
+}
+.items__center{
+  align-items: center;
+}
+.me-2{
+  margin-right: 2px;
+}
+.ms-2{
+  margin-left: 2px;
+}
+.file__block{
+  margin-top: 15px;
+}
+.description__block{
+  margin-top: 10px;
 }
