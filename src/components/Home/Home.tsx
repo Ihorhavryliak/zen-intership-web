@@ -14,7 +14,6 @@ import { Form } from "../Forms/FormMain";
 import { io } from "socket.io-client";
 import "./Home.css";
 import { Paginator } from "./Paginator";
-import "photoswipe/dist/photoswipe.css";
 import { MainPost } from "./MainPost";
 import { SelectPost } from "./SelectPost";
 
