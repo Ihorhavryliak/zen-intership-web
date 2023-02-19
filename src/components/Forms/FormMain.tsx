@@ -211,7 +211,7 @@ export const Form = (props: FormType) => {
         {/*    reCAPTCHA */}
         <ReCAPTCHA
           ref={captchaRef}
-          sitekey={"6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"}
+          sitekey={`${process.env.REACT_APP_SITE_KEY_CAPTCHA}`}
           onChange={onSendToken}
           className="my-3"
         />
