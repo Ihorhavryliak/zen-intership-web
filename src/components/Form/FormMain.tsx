@@ -6,7 +6,8 @@ import { sendMessage } from "../../redux/SendMessageRedux/send_message_redux";
 import { getIsSuccessMessage } from "../../redux/SendMessageRedux/send_message_selector";
 import { AppDispatch } from "../../redux/store";
 import { UploadImg } from "../Home/UploadImg";
-import sanitizeHtml from 'sanitize-html';
+import sanitizeHtml from "sanitize-html";
+import { isValidUrl } from "../../utils/validationUrl";
 
 type FormType = {};
 export const Form = (props: FormType) => {
@@ -14,23 +15,43 @@ export const Form = (props: FormType) => {
   const isSuccessSend = useSelector(getIsSuccessMessage);
   const initialRef: any = null;
   const captchaRef = useRef(initialRef);
+  const [validation, setValidation] = useState({
+    homePage: "",
+    name: "",
+    email: "",
+    message: "",
+    token: "",
+  });
   //set data
   const [name, setName] = useState("");
+  const onSetName = (value: string) => {
+    setName(value);
+    setValidation({ ...validation, name: "" });
+  };
   const [email, setEmail] = useState("");
+  const onSetEmail = (value: string) => {
+    setEmail(value);
+    setValidation({ ...validation, email: "" });
+  };
   const [homePage, setHomePage] = useState("");
+  const onSetHomePage = (value: string) => {
+    setHomePage(value);
+    setValidation({ ...validation, homePage: "" });
+  };
   //sanitizeHtml
   const [message, setMessage] = useState("");
+
   const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const sanitizedInputValue = sanitizeHtml(event.target.value, {
-      allowedTags: ['a', 'code', 'i', 'strong', 'span'],
+      allowedTags: ["a", "code", "i", "strong", "span"],
       allowedAttributes: {
-        'a': ['href', 'title', 'class']
-      }
+        a: ["href", "title", "class"],
+      },
     });
     setMessage(sanitizedInputValue);
+    setValidation({ ...validation, message: "" });
   };
 
-  const [validation, setValidation] = useState("");
   // files
   const [selectedFile, setSelectedFile] = useState([]);
   const [preview, setPreview] = useState([]);
@@ -39,7 +60,7 @@ export const Form = (props: FormType) => {
   const onSendToken = (value: any) => {
     if (value) {
       setIsVerificationToken(true);
-      setValidation("");
+      setValidation({ ...validation, token: "" });
     }
     value.preventDefault();
   };
@@ -47,23 +68,38 @@ export const Form = (props: FormType) => {
   const onSendMessage = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     /* check */
-    if (name.length === 0 || email.length === 0 || message.length === 0) {
-      return setValidation("All field require");
+    //check validation ---
+    if (name.length === 0) {
+      return setValidation({ ...validation, name: "Field require" });
+    } else if (email.length === 0) {
+      return setValidation({ ...validation, email: "Field require" });
+    } else if (message.length === 0) {
+      return setValidation({ ...validation, message: "Field require" });
+    }
+    if (!isValidUrl(homePage)) {
+      return setValidation({ ...validation, homePage: "Not correct url" });
+    }
+
+    if (isVerificationToken === false) {
+      return setValidation({ ...validation, token: "Confirm captcha" });
     }
     captchaRef.current.reset();
-    if (isVerificationToken === false) {
-      return setValidation("Confirm the captcha");
-    }
     dispatch(sendMessage(name, email, message, homePage, selectedFile));
     /* clean */
     setName("");
     setEmail("");
     setHomePage("");
     setMessage("");
-    setValidation("");
     setIsVerificationToken(false);
     setSelectedFile([]);
     setPreview([]);
+    setValidation({
+      homePage: "",
+      name: "",
+      email: "",
+      message: "",
+      token: "",
+    });
   };
   //-----
   return (
@@ -80,8 +116,11 @@ export const Form = (props: FormType) => {
             className="form-control mb-3"
             placeholder="Your name*"
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => onSetName(e.target.value)}
           />
+          {validation.name.length > 0 && (
+            <div className="error">{validation.name}</div>
+          )}
         </div>
         {/* email */}
         <div>
@@ -90,8 +129,11 @@ export const Form = (props: FormType) => {
             className="form-control mb-3"
             placeholder="Your e-mail*"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => onSetEmail(e.target.value)}
           />
+          {validation.email.length > 0 && (
+            <div className="error">{validation.email}</div>
+          )}
         </div>
         {/* home page */}
         <div>
@@ -100,8 +142,11 @@ export const Form = (props: FormType) => {
             className="form-control mb-3"
             placeholder="Home page"
             value={homePage}
-            onChange={(e) => setHomePage(e.target.value)}
+            onChange={(e) => onSetHomePage(e.target.value)}
           />
+          {validation.homePage.length > 0 && (
+            <div className="error">{validation.homePage}</div>
+          )}
         </div>
         {/* message */}
         <div>
@@ -111,13 +156,51 @@ export const Form = (props: FormType) => {
             value={message}
             onChange={handleInputChange}
           />
+          <div>
+            {/*   buttons */}
+            <div className="mb-3">
+              <button
+                onClick={() => setMessage(message + "<i> </i>")}
+                className="btn btn-outline-primary me-2"
+              >
+                [i]
+              </button>
+              <button
+                onClick={() => setMessage(message + "<strong> </strong>")}
+                className="btn btn-outline-primary me-2"
+              >
+                [strong]
+              </button>
+              <button
+                onClick={() => setMessage(message + "<code> </code>")}
+                className="btn btn-outline-primary me-2"
+              >
+                [code]
+              </button>
+              <button
+                onClick={() =>
+                  setMessage(message + "<a href=”” title=””> </a>")
+                }
+                className="btn btn-outline-primary me-2"
+              >
+                [a]
+              </button>
+            </div>
+          </div>
         </div>
-        {validation.length > 0 && (
-          <div className="not__valid">{validation}</div>
+        {validation.message.length > 0 && (
+          <div className="error">{validation.message}</div>
         )}
         {isSuccessSend === false && (
-          <div className="not__valid">An error occurred, try again please</div>
+          <div className="error">An error occurred, try again please</div>
         )}
+
+        <UploadImg
+          preview={preview}
+          setPreview={setPreview}
+          setSelectedFile={setSelectedFile}
+          selectedFile={selectedFile}
+        />
         {/*    reCAPTCHA */}
 
         <ReCAPTCHA
@@ -126,13 +209,9 @@ export const Form = (props: FormType) => {
           onChange={onSendToken}
           className="my-3"
         />
-
-        <UploadImg
-          preview={preview}
-          setPreview={setPreview}
-          setSelectedFile={setSelectedFile}
-          selectedFile={selectedFile}
-        />
+        {validation.token.length > 0 && (
+          <div className="error">{validation.token}</div>
+        )}
         {/* button */}
         <div className="text-end">
           <button className="btn btn-primary mt-4">Send message</button>
