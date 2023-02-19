@@ -1,14 +1,14 @@
 import { AppStateType } from "../store";
 
 export const getIsSuccessMessage = (state: AppStateType) => {
-  return state.messageReducer.isSuccess;
+  return state.postReducer.isSuccess;
 };
 
 export const getAllMessageDataSelector = (state: AppStateType) => {
-  return state.messageReducer.messages;
+  return state.postReducer.messages;
 };
 
 export const getCountPageSelector = (state: AppStateType) => {
-  return state.messageReducer.countPage;
+  return state.postReducer.countPage;
 };
 

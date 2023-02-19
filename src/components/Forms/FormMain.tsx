@@ -2,8 +2,8 @@ import { useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux/es/exports";
-import { sendMessage } from "../../redux/SendMessageRedux/send_message_redux";
-import { getIsSuccessMessage } from "../../redux/SendMessageRedux/send_message_selector";
+import { postMessage } from "../../redux/PostMessageRedux/post_message_redux";
+import { getIsSuccessMessage } from "../../redux/PostMessageRedux/post_message_selector";
 import { AppDispatch } from "../../redux/store";
 import { UploadImg } from "../Home/UploadImg";
 import sanitizeHtml from "sanitize-html";
@@ -94,7 +94,7 @@ export const Form = (props: FormType) => {
       return setValidation({ ...validation, token: "Confirm captcha" });
     }
     captchaRef.current.reset();
-    dispatch(sendMessage(name, email, message, homePage, selectedFile));
+    dispatch(postMessage(name, email, message, homePage, selectedFile));
     /* clean */
     setName("");
     setEmail("");
@@ -202,7 +202,6 @@ export const Form = (props: FormType) => {
         {isSuccessSend === false && (
           <div className="error">An error occurred, try again please</div>
         )}
-
         <UploadImg
           preview={preview}
           setPreview={setPreview}
@@ -210,7 +209,6 @@ export const Form = (props: FormType) => {
           selectedFile={selectedFile}
         />
         {/*    reCAPTCHA */}
-
         <ReCAPTCHA
           ref={captchaRef}
           sitekey={"6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"}

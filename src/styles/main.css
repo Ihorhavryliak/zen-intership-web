@@ -3,17 +3,14 @@ body, html {
     background-color: #222529;
     color: #e2e2e2;
 }
-
 .container{
   max-width: 900px;
 }
-
 .form-control {
   background-color: #2a2d32 !important;
   border: #222529 !important;
   color: #f3f1f1 !important;
 }
-
 .uploadremove {
   background: #dc3545;
   border: 0;

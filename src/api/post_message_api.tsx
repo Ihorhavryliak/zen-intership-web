@@ -1,9 +1,11 @@
 import api from "./api";
 
-export const sendMessageAPI = {
+export const postMessageAPI = {
   //sort-name
-  async getPostOrderByNameDB(name: string = '', page: number = 0) {
-    const res = await api.get<GetAllMessageAPIType>(`post/sort-name/?query=${name}&page=${page}`);
+  async getPostOrderByNameDB(name: string = "", page: number = 0) {
+    const res = await api.get<GetAllMessageAPIType>(
+      `post/sort-name/?query=${name}&page=${page}`
+    );
     return res.data;
   },
   //registrationDB
@@ -16,7 +18,7 @@ export const sendMessageAPI = {
     return res.data;
   },
   // sendAnswerDB
-  async sendAnswerDB(
+  async postAnswerDB(
     name: string,
     email: string,
     message: string,
@@ -41,7 +43,7 @@ export const sendMessageAPI = {
     return res.data;
   },
   // sendMessageDB
-  async sendMessageDB(
+  async postMessageDB(
     name: string,
     email: string,
     message: string,
@@ -70,12 +72,10 @@ export const sendMessageAPI = {
   },
 };
 
-
-
 export type GetAllMessageAPIType = {
-  count: number
-  rows: GetAllMessageNewAPIType[]
-}
+  count: number;
+  rows: GetAllMessageNewAPIType[];
+};
 
 export type GetAllMessageNewAPIType = {
   id: number;
@@ -99,16 +99,15 @@ export type GetAllMessageNewAPIType = {
   child: SendAnswerType[];
 };
 
-
 export type SendAnswerType = {
   id: number;
-      name: string;
-      email: string;
-      message: string;
-      homePage: string;
-      file: string;
-      userId: number;
-      childId: number | null;
-      createdAt: string;
-      updatedAt: string;
-}
+  name: string;
+  email: string;
+  message: string;
+  homePage: string;
+  file: string;
+  userId: number;
+  childId: number | null;
+  createdAt: string;
+  updatedAt: string;
+};

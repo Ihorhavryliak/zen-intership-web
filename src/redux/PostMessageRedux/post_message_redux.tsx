@@ -2,7 +2,7 @@ import {
   GetAllMessageAPIType,
   GetAllMessageNewAPIType,
   SendAnswerType,
-  sendMessageAPI,
+  postMessageAPI,
 } from "../../api/post_message_api";
 import { BaseThunkType, InfersActionsTypes } from "../store";
 
@@ -12,17 +12,13 @@ let initialState = {
   countPage: 0 as number,
 };
 
-const messageReducer = (
+const postReducer = (
   state = initialState,
   action: ActionCreatesTypes
 ): InitialStateType => {
   switch (action.type) {
     case "SET_POST":
-      return { ...state, 
-        messages: [...[action.payload], ...state.messages],
-        /* countPage: action.payload.count  */
-      };
-
+      return { ...state, messages: [...[action.payload], ...state.messages] };
     case "SET_GET_NEW_ANSWER_DATA":
       return {
         ...state,
@@ -33,15 +29,17 @@ const messageReducer = (
           return data;
         }),
       };
-
     case "SET_GET_NEW_DATA":
-      return { ...state, 
+      return {
+        ...state,
         messages: [...state.messages, ...action.payload.rows],
-        countPage: action.payload.count 
+        countPage: action.payload.count,
       };
     case "SET_GET_ALL_MESSAGE":
-      return { ...state, messages: action.payload.rows,
-        countPage: action.payload.count
+      return {
+        ...state,
+        messages: action.payload.rows,
+        countPage: action.payload.count,
       };
     case "SET_IS_SUCCESS":
       return { ...state, isSuccess: action.payload };
@@ -49,7 +47,6 @@ const messageReducer = (
       return state;
   }
 };
-
 //
 export const actions = {
   setNewAnswerData: (data: SendAnswerType) =>
@@ -63,13 +60,13 @@ export const actions = {
   setIsSuccess: (data: boolean) =>
     ({ type: "SET_IS_SUCCESS", payload: data } as const),
 };
-
 //
+
 export const getPostOrderByName =
   (name: string, page: number): ThunkType =>
   async (dispatch) => {
     try {
-      const data = await sendMessageAPI.getPostOrderByNameDB(name, page);
+      const data = await postMessageAPI.getPostOrderByNameDB(name, page);
       dispatch(actions.setGetAllMessage(data));
     } catch (err) {
       console.log(err);
@@ -87,7 +84,7 @@ export const sendAnswer =
   ): ThunkType =>
   async (dispatch) => {
     try {
-      const data = await sendMessageAPI.sendAnswerDB(
+      await postMessageAPI.postAnswerDB(
         name,
         email,
         message,
@@ -95,9 +92,7 @@ export const sendAnswer =
         childId,
         selectedFile
       );
-
       dispatch(actions.setIsSuccess(true)); //
-      //dispatch(actions.setNewAnswerData(data));
     } catch (err) {
       console.log(err);
       dispatch(actions.setIsSuccess(false));
@@ -106,31 +101,28 @@ export const sendAnswer =
 //
 export const getAllMessage = (): ThunkType => async (dispatch) => {
   try {
-    const data = await sendMessageAPI.getPostOrderByNameDB();
+    const data = await postMessageAPI.getPostOrderByNameDB();
     dispatch(actions.setGetAllMessage(data));
   } catch (err) {
     console.log(err);
   }
 };
-
 //set data from Websocket
 export const setWebsocket =
-  (data:   GetAllMessageNewAPIType | SendAnswerType  ): ThunkType =>
+  (data: GetAllMessageNewAPIType | SendAnswerType): ThunkType =>
   async (dispatch) => {
     try {
-
-    if (!data.childId && data.childId === null) { 
+      if (!data.childId && data.childId === null) {
         dispatch(actions.setPost(data as GetAllMessageNewAPIType));
-   } else { 
-         dispatch(actions.setNewAnswerData(data)); //TO DO
-   }
+      } else {
+        dispatch(actions.setNewAnswerData(data)); //TO DO
+      }
     } catch (err) {
       console.log(err);
     }
   };
 //
-//
-export const sendMessage =
+export const postMessage =
   (
     name: string,
     email: string,
@@ -140,23 +132,21 @@ export const sendMessage =
   ): ThunkType =>
   async (dispatch) => {
     try {
-      const data = await sendMessageAPI.sendMessageDB(
+      await postMessageAPI.postMessageDB(
         name,
         email,
         message,
         home,
         selectedFile
       );
-
       dispatch(actions.setIsSuccess(true)); //
-      //dispatch(actions.setNewData(data));
     } catch (err) {
       console.log(err);
       dispatch(actions.setIsSuccess(false));
     }
   };
 
-export default messageReducer;
+export default postReducer;
 export type InitialStateType = typeof initialState;
 export type ActionCreatesTypes = InfersActionsTypes<typeof actions>;
 type ThunkType = BaseThunkType<ActionCreatesTypes>;

@@ -1,31 +1,29 @@
 import React, { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 
-
-export const  Paginator: React.FC<PaginatedItemsType>  =  React.memo((props) => {
-  let {total_count} = props;
-  const {setCurrentPage} = props;
-  const {currentPage} = props;
-  const {itemsPerPage} = props;
-  
-
+export const Paginator: React.FC<PaginatedItemsType> = React.memo((props) => {
+  let { total_count } = props;
+  const { setCurrentPage } = props;
+  const { currentPage } = props;
+  const { itemsPerPage } = props;
   const [pageCount, setPageCount] = useState(0);
 
   useEffect(() => {
     setPageCount(Math.ceil(total_count / itemsPerPage));
-  }, [ itemsPerPage, total_count]);
+  }, [itemsPerPage, total_count]);
 
   const page = (current: any) => {
-    setCurrentPage(current.pageNumber.selected );
+    setCurrentPage(current.pageNumber.selected);
   };
-  
+
   return (
     <>
       <ReactPaginate
-      
-           forcePage = {currentPage}
+        forcePage={currentPage}
         nextLabel=" >"
-        onPageChange={(pageNumber) => {  page({ pageNumber }); }}
+        onPageChange={(pageNumber) => {
+          page({ pageNumber });
+        }}
         pageRangeDisplayed={2}
         marginPagesDisplayed={2}
         pageCount={pageCount}
@@ -42,19 +40,14 @@ export const  Paginator: React.FC<PaginatedItemsType>  =  React.memo((props) => 
         containerClassName="mt-4 d-flex justify-content-center pagination pagination-primary-soft d-inline-block d-md-flex rounded mb-0"
         activeClassName="active"
         renderOnZeroPageCount={undefined}
-        
       />
     </>
   );
-})
-
-
+});
 
 type PaginatedItemsType = {
-
-  total_count: number
-  // items: any
-  itemsPerPage: number
-  setCurrentPage: (num: number) => void
-  currentPage: number
-}
+  total_count: number;
+  itemsPerPage: number;
+  setCurrentPage: (num: number) => void;
+  currentPage: number;
+};

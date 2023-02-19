@@ -1,12 +1,12 @@
 import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
 import authReducer from "./AuthReducer/Auth_reducer";
-import messageReducer from "./SendMessageRedux/send_message_redux";
+import postReducer from "./PostMessageRedux/post_message_redux";
 
 const store = configureStore({
   reducer: {
     // @ts-ignore
-    messageReducer,
-      // @ts-ignore
+    postReducer,
+    // @ts-ignore
     authReducer,
   },
 });

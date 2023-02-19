@@ -4,7 +4,6 @@ import { Register } from "./components/Register/Register";
 export const Routers = () => {
   return (
     <>
-      {/*   main  */}
       <Routes>
         <Route path="/">
           <Route index element={<Home />} />
@@ -12,7 +11,6 @@ export const Routers = () => {
             <Route index element={<Register />}></Route>
           </Route>
         </Route>
-     
       </Routes>
     </>
   );

@@ -7,4 +7,3 @@ export const getIsSuccessMessage = (state: AppStateType) => {
 export const getAllMessageDataSelector = (state: AppStateType) => {
   return state.authReducer.messages;
 };
-

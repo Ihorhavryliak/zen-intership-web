@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { ValidationType } from "./Home";
 
 export const UploadImg = (props: UploadPortfolioPhotoType) => {
   const { setSelectedFile, selectedFile, preview, setPreview } = props;
@@ -17,8 +16,8 @@ export const UploadImg = (props: UploadPortfolioPhotoType) => {
         ...validation,
         size: "The text file must not be larger than 100 kb, TXT format.",
       });
-    }else {
-      setValidation({ size: "" })
+    } else {
+      setValidation({ size: "" });
     }
     //fre view photo
     if (!event.target.files || event.target.files.length === 0) {
@@ -27,30 +26,35 @@ export const UploadImg = (props: UploadPortfolioPhotoType) => {
     }
     setSelectedFile([...event.target.files]);
   }
-
   // create a preview as a side effect, whenever selected file is changed
   useEffect(() => {
     const stringUrl = [] as string[];
-       /* check is txt format */
-       if(selectedFile &&  selectedFile[0] && selectedFile[0].name && selectedFile[0].name.slice(selectedFile[0].name.lastIndexOf('.')) === '.txt'){
-         stringUrl.push((selectedFile[0].name));
-         setPreview(stringUrl);
-         return
-      }
+    /* check is txt format */
+    if (
+      selectedFile &&
+      selectedFile[0] &&
+      selectedFile[0].name &&
+      selectedFile[0].name.slice(selectedFile[0].name.lastIndexOf(".")) ===
+        ".txt"
+    ) {
+      stringUrl.push(selectedFile[0].name);
+      setPreview(stringUrl);
+      return;
+    }
     Object.keys(selectedFile).forEach((key) => {
       stringUrl.push(URL.createObjectURL(selectedFile[key]) as string);
     });
     if (stringUrl.length !== 0) {
       setPreview(stringUrl);
-    } 
+    }
   }, [selectedFile]);
 
   const onDeletePhoto = () => {
     setPreview([]);
     setSelectedFile([]);
-    setValidation({ size: "" })
+    setValidation({ size: "" });
   };
-console.log(preview, 'preview')
+  console.log(preview, "preview");
   return (
     <div className="col-12">
       <div className="text-center justify-content-center align-items-center p-4 p-sm-5 border border-2 border-dashed position-relative rounded-3">
@@ -80,19 +84,16 @@ console.log(preview, 'preview')
                 return (
                   <div key={`${name}_${i}`} className="w-120px ">
                     <label className="position-relative me-4">
-                      {name.slice(name.lastIndexOf('.')) === '.txt' ? 
-                      <span>
-                      {name}
-                      </span>
-                      :
-                      
-                      <img
-                      src={name}
-                      key={name}
-                      className="avatar-img  border border-white border-3 shadow img__added"
-                      alt={name}
-                    />
-                      }
+                      {name.slice(name.lastIndexOf(".")) === ".txt" ? (
+                        <span>{name}</span>
+                      ) : (
+                        <img
+                          src={name}
+                          key={name}
+                          className="avatar-img  border border-white border-3 shadow img__added"
+                          alt={name}
+                        />
+                      )}
                       <button
                         type="button"
                         className="uploadremove button__index"
