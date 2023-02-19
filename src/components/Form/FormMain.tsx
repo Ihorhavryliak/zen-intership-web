@@ -67,8 +67,18 @@ export const Form = (props: FormType) => {
   // SendMessage
   const onSendMessage = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    /* check */
     //check validation ---
+    const pattern = /^[a-zA-Z0-9]+$/;
+    if (!pattern.test(name)) {
+      return setValidation({
+        ...validation,
+        name: "No correct enter name. Example: Bred",
+      });
+    }
+    const patternEmail = /^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/;
+    if (!patternEmail.test(email)) {
+      return setValidation({ ...validation, email: "No valid email" });
+    }
     if (name.length === 0) {
       return setValidation({ ...validation, name: "Field require" });
     } else if (email.length === 0) {
@@ -158,29 +168,27 @@ export const Form = (props: FormType) => {
           />
           <div>
             {/*   buttons */}
-            <div className="mb-3">
+            <div className="mb-3 d-flex justify-content-end">
               <button
-                onClick={() => setMessage(message + "<i> </i>")}
+                onClick={() => setMessage(message + "<i></i>")}
                 className="btn btn-outline-primary me-2"
               >
                 [i]
               </button>
               <button
-                onClick={() => setMessage(message + "<strong> </strong>")}
+                onClick={() => setMessage(message + "<strong></strong>")}
                 className="btn btn-outline-primary me-2"
               >
                 [strong]
               </button>
               <button
-                onClick={() => setMessage(message + "<code> </code>")}
+                onClick={() => setMessage(message + "<code></code>")}
                 className="btn btn-outline-primary me-2"
               >
                 [code]
               </button>
               <button
-                onClick={() =>
-                  setMessage(message + "<a href=”” title=””> </a>")
-                }
+                onClick={() => setMessage(message + "<a href='' title=''></a>")}
                 className="btn btn-outline-primary me-2"
               >
                 [a]

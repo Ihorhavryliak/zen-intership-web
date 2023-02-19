@@ -43,7 +43,7 @@ export const FormRegister = (props: FormRegister) => {
         <div>
           <input
             type="text"
-            className="input"
+            className="form-control mb-3"
             placeholder="Your name*"
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -53,7 +53,7 @@ export const FormRegister = (props: FormRegister) => {
         <div>
           <input
             type="email"
-            className="input"
+            className="form-control mb-3"
             placeholder="Your e-mail*"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -63,7 +63,7 @@ export const FormRegister = (props: FormRegister) => {
           <div>
           <input
             type="password"
-            className="input"
+            className="form-control mb-3"
             placeholder="Your password*"
             value={email}
             onChange={(e) => setPassword(e.target.value)}
@@ -78,7 +78,7 @@ export const FormRegister = (props: FormRegister) => {
         )} */}
         {/* button */}
         <div>
-          <button className="btn">Send message</button>
+          <button className="btn btn-primary">Sign-up</button>
         </div>
       </form>
     </>

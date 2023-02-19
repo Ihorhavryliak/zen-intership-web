@@ -61,6 +61,17 @@ export const FormAnswer = (props: FormType) => {
   const onSendAnswer = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     //check validation ---
+    const pattern = /^[a-zA-Z0-9]+$/;
+    if (!pattern.test(name)) {
+      return setValidation({
+        ...validation,
+        name: "No correct enter name. Example: Bred",
+      });
+    }
+    const patternEmail = /^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/;
+    if (!patternEmail.test(email)) {
+      return setValidation({ ...validation, email: "No valid email" });
+    }
     if (name.length === 0) {
       return setValidation({ ...validation, name: "Field require" });
     } else if (email.length === 0) {
@@ -71,6 +82,7 @@ export const FormAnswer = (props: FormType) => {
     if (!isValidUrl(homePage)) {
       return setValidation({ ...validation, homePage: "Not correct url" });
     }
+
     //send ---
     dispatch(sendAnswer(name, email, message, homePage, childId, selectedFile));
     /* clean */
@@ -137,7 +149,7 @@ export const FormAnswer = (props: FormType) => {
             onChange={handleInputChange}
           />
           {/*   buttons */}
-          <div className="mb-3">
+          <div className="mb-3 d-flex justify-content-end">
             <button
               onClick={() => setMessage(message + "<i> </i>")}
               className="btn btn-outline-primary me-2"
@@ -176,7 +188,7 @@ export const FormAnswer = (props: FormType) => {
           setSelectedFile={setSelectedFile}
           selectedFile={selectedFile}
         />
-             {/*    reCAPTCHA */}
+        {/*    reCAPTCHA */}
 
         {/*   <ReCAPTCHA
           ref={captchaRef}

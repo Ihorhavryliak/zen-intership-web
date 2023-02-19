@@ -123,7 +123,9 @@ const Home = () => {
                   </div>
                 </div>
                 {/*  body message */}
-                <div className="description__block">{data.message} </div>
+                <div className="description__block">
+                  <div dangerouslySetInnerHTML={{ __html: data.message }}></div>    
+                  </div>
                 {/*   file img */}
                 <div className="mt-3">
                   {data.file.length > 0 &&
@@ -166,13 +168,14 @@ const Home = () => {
                     {isOpenForm.id === data.id ? "Close" : "Answer"}
                   </button>
                 </div>
-                <div>
+                <div className="d-flex justify-content-end">
+                  <div className="col-10">
                   {isOpenForm.id === data.id ? (
                     <FormAnswer childId={data.id} />
                   ) : (
                     ""
                   )}
-                </div>
+                </div></div>
               </div>
               {/* answer message */}
               <div className="block__answer">
@@ -205,7 +208,7 @@ const Home = () => {
                         </div>
                         {/*  body message */}
                         <div className="description__block">
-                          {answer.message}
+                        <div dangerouslySetInnerHTML={{ __html: answer.message }}></div>    
                         </div>
                         {/*   file img */}
                         <div className="mt-3">
@@ -232,6 +235,7 @@ const Home = () => {
             </div>
           );
         })}
+        <div className="mb-5 mt-3">
       {countItems !== 0 && (
         <Paginator
           total_count={countItems}
@@ -240,6 +244,7 @@ const Home = () => {
           itemsPerPage={query.limit}
         />
       )}
+      </div>
     </section>
   );
 };
