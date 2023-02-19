@@ -9,7 +9,6 @@ import { UploadImg } from "../Home/UploadImg";
 import sanitizeHtml from "sanitize-html";
 import { isValidUrl } from "../../utils/validationUrl";
 
-type FormType = {};
 export const Form = (props: FormType) => {
   const dispatch: AppDispatch = useDispatch();
   const isSuccessSend = useSelector(getIsSuccessMessage);
@@ -226,3 +225,5 @@ export const Form = (props: FormType) => {
     </>
   );
 };
+
+type FormType = {};

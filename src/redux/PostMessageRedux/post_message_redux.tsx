@@ -111,6 +111,7 @@ export const getAllMessage = (): ThunkType => async (dispatch) => {
 export const setWebsocket =
   (data: GetAllMessageNewAPIType | SendAnswerType): ThunkType =>
   async (dispatch) => {
+    debugger
     try {
       if (!data.childId && data.childId === null) {
         dispatch(actions.setPost(data as GetAllMessageNewAPIType));

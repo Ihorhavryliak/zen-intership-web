@@ -1,20 +1,17 @@
-import React from "react";
+import { useState } from "react";
 import noPhoto from "../../assets/img/noPhoto.png";
 import { FaFileAlt, FaArrowUp, FaArrowDown } from "react-icons/fa";
 import { parseDate } from "../../utils/parseDate";
 import { FormAnswer } from "../Forms/FormAnswer";
-import { Gallery, Item } from "react-photoswipe-gallery";
 import { GetAllMessageNewAPIType } from "../../api/post_message_api";
 import { AnswerPost } from "./AnswerPost";
-
-type MainPostType = {
-  messageAllData: GetAllMessageNewAPIType[];
-  onIsOpenForm: (val: number) => void;
-  isOpenForm: number;
-};
+import { GalleryMail } from "./GalleryMail";
 
 export const MainPost = (props: MainPostType) => {
   const { messageAllData, isOpenForm, onIsOpenForm } = props;
+  // modal
+  const [onShowWindow, setOnShowWindow] = useState({ id: 0 });
+
   return (
     <>
       {messageAllData &&
@@ -56,26 +53,20 @@ export const MainPost = (props: MainPostType) => {
                       <FaFileAlt /> {data.file}
                     </span>
                   ) : data.file.length > 0 ? (
-                    <Gallery>
-                      <Item
-                        original={`${"http://localhost:4000"}/${data.file}`}
-                        thumbnail={`${"http://localhost:4000"}/${data.file}`}
-                        width="1600"
-                        height="1600"
-                      >
-                        {({ ref, open }) => (
-                          <img
-                            ref={
-                              ref as React.MutableRefObject<HTMLImageElement>
-                            }
-                            onClick={open}
-                            src={`${"http://localhost:4000"}/${data.file}`}
-                            alt={data.name}
-                            className={`img__added`}
-                          />
-                        )}
-                      </Item>
-                    </Gallery>
+                    <>
+                      {" "}
+                      <img
+                        onClick={() => setOnShowWindow({ id: data.id })}
+                        src={`${"http://localhost:4000"}/${data.file}`}
+                        alt={data.name}
+                        className={`img__added`}
+                      />
+                      <GalleryMail
+                        onShowWindow={onShowWindow.id}
+                        setOnShowWindow={setOnShowWindow}
+                        data={data}
+                      />
+                    </>
                   ) : (
                     ""
                   )}
@@ -108,4 +99,10 @@ export const MainPost = (props: MainPostType) => {
         })}
     </>
   );
+};
+
+type MainPostType = {
+  messageAllData: GetAllMessageNewAPIType[];
+  onIsOpenForm: (val: number) => void;
+  isOpenForm: number;
 };

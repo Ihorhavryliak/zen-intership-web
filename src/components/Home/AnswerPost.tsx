@@ -4,9 +4,7 @@ import { FaFileAlt, FaArrowUp, FaArrowDown } from "react-icons/fa";
 import { parseDate } from "../../utils/parseDate";
 import { GetAllMessageNewAPIType } from "../../api/post_message_api";
 
-type AnswerPostType = {
-  data: GetAllMessageNewAPIType;
-};
+
 export const AnswerPost = (props: AnswerPostType) => {
   const { data } = props;
   return (
@@ -62,4 +60,8 @@ export const AnswerPost = (props: AnswerPostType) => {
         })}
     </>
   );
+};
+
+type AnswerPostType = {
+  data: GetAllMessageNewAPIType;
 };

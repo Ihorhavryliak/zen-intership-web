@@ -17,9 +17,6 @@ import { Paginator } from "./Paginator";
 import { MainPost } from "./MainPost";
 import { SelectPost } from "./SelectPost";
 
-export type ValidationType = {
-  size: string;
-};
 
 const Home = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -97,3 +94,8 @@ const Home = () => {
   );
 };
 export default Home;
+
+
+export type ValidationType = {
+  size: string;
+};

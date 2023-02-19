@@ -9,10 +9,6 @@ import { UploadImg } from "../Home/UploadImg";
 import sanitizeHtml from "sanitize-html";
 import { isValidUrl } from "../../utils/validationUrl";
 
-type FormType = {
-  childId: number;
-};
-
 export const FormAnswer = (props: FormType) => {
   const { childId } = props;
   const dispatch: AppDispatch = useDispatch();
@@ -202,4 +198,10 @@ export const FormAnswer = (props: FormType) => {
       </form>
     </>
   );
+};
+
+
+
+type FormType = {
+  childId: number;
 };

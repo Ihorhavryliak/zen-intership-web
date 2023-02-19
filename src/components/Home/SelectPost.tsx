@@ -1,8 +1,3 @@
-import React from "react";
-
-type SelectPostType = {
-  onSendSort: (name: string) => void;
-};
 
 export const SelectPost = (props: SelectPostType) => {
   const { onSendSort } = props;
@@ -24,3 +19,6 @@ export const SelectPost = (props: SelectPostType) => {
   );
 };
 
+type SelectPostType = {
+  onSendSort: (name: string) => void;
+};
