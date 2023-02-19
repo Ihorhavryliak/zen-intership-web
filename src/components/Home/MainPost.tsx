@@ -61,7 +61,7 @@ export const MainPost = (props: MainPostType) => {
                       {" "}
                       <img
                         onClick={() => setOnShowWindow({ id: data.id })}
-                        src={`${"http://localhost:4000"}/${data.file}`}
+                        src={`${process.env.REACT_APP_SITE_SERVER_URL}/${data.file}`}
                         alt={data.name}
                         className={`img__added`}
                       />

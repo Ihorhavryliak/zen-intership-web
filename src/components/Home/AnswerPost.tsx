@@ -50,7 +50,7 @@ export const AnswerPost = (props: AnswerPostType) => {
                   </span>
                 ) : answer.file.length > 0 ? (
                   <img
-                    src={`${"http://localhost:4000"}/${answer.file}`}
+                    src={`${process.env.REACT_APP_SITE_SERVER_URL}/${answer.file}`}
                     className={`img__added`}
                     alt={answer.name}
                   />

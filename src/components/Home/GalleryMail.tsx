@@ -37,7 +37,7 @@ export const GalleryMail = (props: GalleryMailType) => {
                 </div>
                 <div className="modal-body text-center">
                   <img
-                    src={`${"http://localhost:4000"}/${data.file}`}
+                    src={`${process.env.REACT_APP_SITE_SERVER_URL}/${data.file}`}
                     alt={data.name}
                   />{" "}
                 </div>
