@@ -212,12 +212,13 @@ export const FormAnswer = (props: FormType) => {
           selectedFile={selectedFile}
         />
         {/*    reCAPTCHA */}
-
+        <div className="mt2"> 
         <ReCAPTCHA
           ref={captchaRef}
           sitekey={`${process.env.REACT_APP_SITE_KEY_CAPTCHA_ANSWER}`}
           onChange={onSendToken}
         />
+        </div> 
         {validation.token.length > 0 && (
           <div className="error">{validation.token}</div>
         )}
