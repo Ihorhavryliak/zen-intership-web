@@ -4,7 +4,6 @@ import { FaFileAlt, FaArrowUp, FaArrowDown } from "react-icons/fa";
 import { parseDate } from "../../utils/parseDate";
 import { GetAllMessageNewAPIType } from "../../api/post_message_api";
 
-
 export const AnswerPost = (props: AnswerPostType) => {
   const { data } = props;
   return (
@@ -34,6 +33,10 @@ export const AnswerPost = (props: AnswerPostType) => {
                   </span>
                 </div>
               </div>
+              {/* url */}
+              {data.homePage.length > 0 && (
+                <div className="my-2">{data.homePage}</div>
+              )}
               {/*  body message */}
               <div className="description__block">
                 <div dangerouslySetInnerHTML={{ __html: answer.message }}></div>

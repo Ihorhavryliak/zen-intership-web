@@ -169,24 +169,28 @@ export const Form = (props: FormType) => {
             {/*   buttons */}
             <div className="mb-3 d-flex justify-content-end">
               <button
+                type="button"
                 onClick={() => setMessage(message + "<i></i>")}
                 className="btn btn-outline-primary me-2"
               >
                 [i]
               </button>
               <button
+                type="button"
                 onClick={() => setMessage(message + "<strong></strong>")}
                 className="btn btn-outline-primary me-2"
               >
                 [strong]
               </button>
               <button
+                type="button"
                 onClick={() => setMessage(message + "<code></code>")}
                 className="btn btn-outline-primary me-2"
               >
                 [code]
               </button>
               <button
+                type="button"
                 onClick={() => setMessage(message + "<a href='' title=''></a>")}
                 className="btn btn-outline-primary me-2"
               >
@@ -201,6 +205,7 @@ export const Form = (props: FormType) => {
         {isSuccessSend === false && (
           <div className="error">An error occurred, try again please</div>
         )}
+          <hr className="mb-0" />
         <UploadImg
           preview={preview}
           setPreview={setPreview}

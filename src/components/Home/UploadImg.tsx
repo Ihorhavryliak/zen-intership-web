@@ -56,8 +56,8 @@ export const UploadImg = (props: UploadPortfolioPhotoType) => {
   };
   console.log(preview, "preview");
   return (
-    <div className="col-12">
-      <div className="text-center justify-content-center align-items-center p-4 p-sm-5 border border-2 border-dashed position-relative rounded-3">
+    <div >
+      <div >
         {/* 		<!-- Image --> */}
         <img
           src="assets/images/element/gallery.svg"
@@ -71,7 +71,7 @@ export const UploadImg = (props: UploadPortfolioPhotoType) => {
                 accept="image/gif, image/jpeg, image/png, .txt"
                 type="file"
                 multiple={false}
-                className="form-control stretched-link"
+                className="form-control"
                 onChange={handleChange}
               />
             </span>

@@ -41,6 +41,10 @@ export const MainPost = (props: MainPostType) => {
                     </span>
                   </div>
                 </div>
+                {/* url */}
+                {data.homePage.length > 0 && (
+                  <div className="my-2">{data.homePage}</div>
+                )}
                 {/*  body message */}
                 <div className="description__block">
                   <div dangerouslySetInnerHTML={{ __html: data.message }}></div>

@@ -3,8 +3,8 @@ import { NavLink } from "react-router-dom";
 export const Header = () => {
   return (
     <header className="header">
-      <div className="container position__relative overflow__hidden">
-        <div className="d-flex justify-between">
+      <div className="container my-4">
+        <div className="d-flex justify-content-between">
           <div>
             <NavLink to="/">Home</NavLink>
           </div>
@@ -13,6 +13,7 @@ export const Header = () => {
           </div>
         </div>
       </div>
+      <hr className="mb-4" />
     </header>
   );
 };
