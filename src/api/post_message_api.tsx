@@ -10,7 +10,7 @@ export const postMessageAPI = {
   },
   //registrationDB
   async registrationDB(name: string, email: string, password: string) {
-    const res = await api.post<any>("users", {
+    const res = await api.post<any>("user", {
       name,
       email,
       password,
