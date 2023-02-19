@@ -2,18 +2,20 @@ import { useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux/es/exports";
-import { sendMessage } from "../../redux/SendMessageRedux/send_message_redux";
+import { sendAnswer } from "../../redux/SendMessageRedux/send_message_redux";
 import { getIsSuccessMessage } from "../../redux/SendMessageRedux/send_message_selector";
 import { AppDispatch } from "../../redux/store";
 import { UploadImg } from "../Home/UploadImg";
 import sanitizeHtml from 'sanitize-html';
 
-type FormType = {};
-export const Form = (props: FormType) => {
+type FormType = {
+  childId: number
+};
+
+export const FormAnswer = (props: FormType) => {
+  const {childId} = props;
   const dispatch: AppDispatch = useDispatch();
   const isSuccessSend = useSelector(getIsSuccessMessage);
-  const initialRef: any = null;
-  const captchaRef = useRef(initialRef);
   //set data
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -29,39 +31,25 @@ export const Form = (props: FormType) => {
     });
     setMessage(sanitizedInputValue);
   };
-
   const [validation, setValidation] = useState("");
   // files
   const [selectedFile, setSelectedFile] = useState([]);
   const [preview, setPreview] = useState([]);
-  const [isVerificationToken, setIsVerificationToken] = useState(false);
-  //send token captcha
-  const onSendToken = (value: any) => {
-    if (value) {
-      setIsVerificationToken(true);
-      setValidation("");
-    }
-    value.preventDefault();
-  };
+
   // SendMessage
-  const onSendMessage = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSendAnswer = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     /* check */
     if (name.length === 0 || email.length === 0 || message.length === 0) {
       return setValidation("All field require");
     }
-    captchaRef.current.reset();
-    if (isVerificationToken === false) {
-      return setValidation("Confirm the captcha");
-    }
-    dispatch(sendMessage(name, email, message, homePage, selectedFile));
+    dispatch(sendAnswer(name, email, message, homePage, childId, selectedFile));
     /* clean */
     setName("");
     setEmail("");
     setHomePage("");
     setMessage("");
     setValidation("");
-    setIsVerificationToken(false);
     setSelectedFile([]);
     setPreview([]);
   };
@@ -69,10 +57,9 @@ export const Form = (props: FormType) => {
   return (
     <>
       <form
-        onSubmit={onSendMessage}
-        className="z__index__6 position__relative form__post"
+        onSubmit={onSendAnswer}
+        className="z__index__6 position__relative form__post mt-4"
       >
-        <h1 className="mb-4">Leave a message</h1>
         {/*     name */}
         <div>
           <input
@@ -120,12 +107,11 @@ export const Form = (props: FormType) => {
         )}
         {/*    reCAPTCHA */}
 
-        <ReCAPTCHA
+      {/*   <ReCAPTCHA
           ref={captchaRef}
           sitekey={"6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"}
           onChange={onSendToken}
-          className="my-3"
-        />
+        /> */}
 
         <UploadImg
           preview={preview}
@@ -135,7 +121,7 @@ export const Form = (props: FormType) => {
         />
         {/* button */}
         <div className="text-end">
-          <button className="btn btn-primary mt-4">Send message</button>
+          <button className="btn btn-primary mt-4">Send answer</button>
         </div>
       </form>
     </>

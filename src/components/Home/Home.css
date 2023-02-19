@@ -1,33 +1,12 @@
-.h1__bold{
-  font-weight: bold;
-  font-size: 50px;
-  color: #000000;
-  margin-bottom: 30px;
-}
-.btn{
-width: 218px;
-height: 40px;
-background: #4fbbfa;
-border-radius: 500px;
-border: 0;
-font-family: 'Apercu Arabic Pro';
-font-style: normal;
-font-weight: 400;
-font-size: 18px;
-color: #FFFFFF;
-margin-top: 15px;
-cursor: pointer;
-}
-.btn:hover{
- opacity: 0.9;
-}
+
 /* //message */
 .block__message{
   min-height: 100px;
-  background-color: #eee;
+  background-color: #1b1e21;
   margin-bottom: 15px;
   border-radius: 4px;
   padding: 25px 20px;
+  color: #e2e2e2;
 }
 /* header */
 .img__user{
@@ -39,18 +18,25 @@ cursor: pointer;
   max-width: 50px;
   border-radius: 4px;
 }
-.items__center{
-  align-items: center;
-}
-.me-2{
-  margin-right: 2px;
-}
-.ms-2{
-  margin-left: 2px;
-}
-.file__block{
-  margin-top: 15px;
-}
+
 .description__block{
   margin-top: 10px;
+}
+/* answer */
+.block__answer{
+  margin-left: 4rem;
+  margin-bottom: 30px;
+}
+
+.div__answer{
+  min-height: 100px;
+ 
+  margin-bottom: 15px;
+  border-radius: 4px;
+  padding: 25px 20px;
+  color: #fff;
+  background-color:#1b1e21a8;
+}
+.button__index{
+  z-index: 10;
 }

@@ -32,7 +32,6 @@ export const actions = {
 export const onRegistration =
   (name: string, email: string, password: string, ): ThunkType =>
   async (dispatch) => {
-    debugger
     try {
      const data = await sendMessageAPI.registrationDB(name, email, password );
       dispatch(actions.setNewData(data));

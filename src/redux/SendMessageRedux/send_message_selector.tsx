@@ -8,3 +8,7 @@ export const getAllMessageDataSelector = (state: AppStateType) => {
   return state.messageReducer.messages;
 };
 
+export const getCountPageSelector = (state: AppStateType) => {
+  return state.messageReducer.countPage;
+};
+

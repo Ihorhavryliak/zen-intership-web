@@ -1,46 +1,37 @@
-
 body, html {
     margin: 0;
-    background-color: rgb(133, 133, 133);
+    background-color: #222529;
+    color: #e2e2e2;
 }
+
 .container{
-  margin: auto;
-  width: 900px;
+  max-width: 900px;
 }
-.overflow__hidden{
-  overflow: hidden;
+
+.form-control {
+  background-color: #2a2d32 !important;
+  border: #222529 !important;
+  color: #f3f1f1 !important;
 }
-.d-flex{
-  display: flex;
+
+.uploadremove {
+  background: #dc3545;
+  border: 0;
+  border-radius: 50%;
+  height: 20px;
+  line-height: 20px;
+  padding: 0;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: 0;
+  transition: all .3s ease-in-out;
+  width: 20px;
+  z-index: 1;
 }
-.justify-between{
-  justify-content: space-between;
-}
-.header{
-  padding: 20px 0;
-  font-size: 2rem;
-}
-.input{
-  box-sizing: border-box;
-  min-height: 40px;
-  width: 450px;
-  border: 1px solid #DCDCDC;
-  border-radius: 4px;
-  margin-bottom: 14px;
-  padding: 0 0 0 15px;
-}
-.textarea__height{
-  box-sizing: border-box;
-  width: 450px;
-  min-height: 120px;
-  border: 1px solid #DCDCDC;
-  border-radius: 4px;
-  margin-bottom: 14px;
-  padding: 15px 0 0 15px;
-}
-.fs-2{
-  font-size: 1.5rem;
-}
-.form__post{
-  margin-bottom: 2.5rem;
+.error{
+  color: #dc3545 !important;
+    font-size: .875em;
+    margin-top: 0.25rem;
+    width: 100%;
 }

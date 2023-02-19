@@ -9,7 +9,7 @@ function App() {
   return (
     <main>
       <Header/>
-      <div className="container position__relative overflow__hidden">
+      <div className="container">
         <div className="row">
           <Routers />
         </div>
