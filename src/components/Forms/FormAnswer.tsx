@@ -212,7 +212,7 @@ export const FormAnswer = (props: FormType) => {
           selectedFile={selectedFile}
         />
         {/*    reCAPTCHA */}
-        <div className="mt2">
+        <div className="mt-2">
           <ReCAPTCHA
             ref={captchaRef}
             sitekey={`${process.env.REACT_APP_SITE_KEY_CAPTCHA_ANSWER}`}
