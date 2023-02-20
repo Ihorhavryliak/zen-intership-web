@@ -2,7 +2,7 @@ version: '3.0'
 
 services:
   main:
-    container_name: main
+    container_name: app
     build:
       context: .
     env_file:
@@ -14,21 +14,8 @@ services:
       - 4000:4000
       - 9229:9229
     command: npm start
-    depends_on:
-      - postgres
     restart: always
-  postgres:
-    container_name: postgres
-    image: postgres:15
-    env_file:
-      - .env
-    environment:
-      PG_DATA: /var/lib/postgresql/data
-    ports:
-      - 5432:5432
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-    restart: always
+
 
 volumes:
   pgdata:

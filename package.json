@@ -58,6 +58,8 @@
   "devDependencies": {
     "@types/react-google-recaptcha": "^2.1.5",
     "@types/react-transition-group": "^4.4.5",
-    "@types/sanitize-html": "^2.8.0"
+    "@types/sanitize-html": "^2.8.0",
+    "eslint": "^8.34.0",
+    "eslint-plugin-react": "^7.32.2"
   }
 }
