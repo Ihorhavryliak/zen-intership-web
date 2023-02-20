@@ -10,13 +10,16 @@ The Message App is a web-based platform that allows users to leave comments on a
 ## Getting Started:
 To get started with the Message App, follow these steps:
 1. Clone the repository
-2. In the terminal enter command `npm i`
+2. In the terminal enter the command `npm i`
 
 ## Create file `.env` with variables:
 1. `REACT_APP_SITE_SERVER_URL= ` ""; //url server. Example `=http://localhost:4000/`
 2. `REACT_APP_SITE_LISTEN_SOCKET= ` ""; //url socket  listen. Example `=http://localhost:4000/events`
 3. `REACT_APP_SITE_KEY_CAPTCHA = ` ""; //key captcha main form. Example `=6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI`
 4. `REACT_APP_SITE_KEY_CAPTCHA_ANSWER =  ` ""; //key captcha answer form. Example `=6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI`
+
+## Create a user (require):
+1. Register a user on this example page url:  `http://localhost:3000/sign-up` (when you connect base Data)
 
 ## Run
 1. Run  by running `npm start` in the project directory

@@ -6,7 +6,7 @@ import {
   transitionsModalProfileShadow,
 } from "../../utils/AnimationList";
 
-export const GalleryMail = (props: GalleryMailType) => {
+export const MainGallery = (props: GalleryMailType) => {
   const { setOnShowWindow, onShowWindow, data } = props;
   return (
     <>

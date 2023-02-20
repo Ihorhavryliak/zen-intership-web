@@ -5,10 +5,10 @@ import { parseDate } from "../../utils/parseDate";
 import { FormAnswer } from "../Forms/FormAnswer";
 import { GetAllMessageNewAPIType } from "../../api/post_message_api";
 import { AnswerPost } from "./AnswerPost";
-import { GalleryMail } from "./GalleryMail";
+import { MainGallery } from "./MainGallery";
 
 export const MainPost = (props: MainPostType) => {
-  const { messageAllData, isOpenForm, onIsOpenForm } = props;
+  const { messageAllData, isOpenForm, onIsOpenForm, isConnected } = props;
   // modal
   const [onShowWindow, setOnShowWindow] = useState({ id: 0 });
 
@@ -65,7 +65,7 @@ export const MainPost = (props: MainPostType) => {
                         alt={data.name}
                         className={`img__added`}
                       />
-                      <GalleryMail
+                      <MainGallery
                         onShowWindow={onShowWindow.id}
                         setOnShowWindow={setOnShowWindow}
                         data={data}
@@ -87,7 +87,7 @@ export const MainPost = (props: MainPostType) => {
                 <div className="d-flex justify-content-end">
                   <div className="col-10">
                     {isOpenForm === data.id ? (
-                      <FormAnswer childId={data.id} />
+                      <FormAnswer isConnected={isConnected} childId={data.id} />
                     ) : (
                       ""
                     )}
@@ -109,4 +109,5 @@ type MainPostType = {
   messageAllData: GetAllMessageNewAPIType[];
   onIsOpenForm: (val: number) => void;
   isOpenForm: number;
+  isConnected: boolean;
 };

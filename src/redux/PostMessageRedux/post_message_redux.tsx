@@ -109,14 +109,13 @@ export const getAllMessage = (): ThunkType => async (dispatch) => {
 };
 //set data from Websocket
 export const setWebsocket =
-  (data: GetAllMessageNewAPIType | SendAnswerType): ThunkType =>
+  (data: GetAllMessageNewAPIType[] | SendAnswerType[] | []): ThunkType =>
   async (dispatch) => {
-    debugger
     try {
-      if (!data.childId && data.childId === null) {
-        dispatch(actions.setPost(data as GetAllMessageNewAPIType));
+      if (!data[0].childId && data[0].childId === null) {
+        dispatch(actions.setPost(data[0] as GetAllMessageNewAPIType));
       } else {
-        dispatch(actions.setNewAnswerData(data)); //TO DO
+        dispatch(actions.setNewAnswerData(data[0])); //TO DO
       }
     } catch (err) {
       console.log(err);

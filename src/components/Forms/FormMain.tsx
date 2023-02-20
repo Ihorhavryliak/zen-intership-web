@@ -9,7 +9,8 @@ import { UploadImg } from "../Home/UploadImg";
 import sanitizeHtml from "sanitize-html";
 import { isValidUrl } from "../../utils/validationUrl";
 
-export const Form = (props: FormType) => {
+export const FormMain = (props: FormType) => {
+  const { isConnected } = props;
   const dispatch: AppDispatch = useDispatch();
   const isSuccessSend = useSelector(getIsSuccessMessage);
   const initialRef: any = null;
@@ -205,7 +206,7 @@ export const Form = (props: FormType) => {
         {isSuccessSend === false && (
           <div className="error">An error occurred, try again please</div>
         )}
-          <hr className="mb-0" />
+        <hr className="mb-0" />
         <UploadImg
           preview={preview}
           setPreview={setPreview}
@@ -224,11 +225,15 @@ export const Form = (props: FormType) => {
         )}
         {/* button */}
         <div className="text-end">
-          <button className="btn btn-primary mt-4">Send message</button>
+          <button disabled={isConnected} className="btn btn-primary mt-4">
+            Send message
+          </button>
         </div>
       </form>
     </>
   );
 };
 
-type FormType = {};
+type FormType = {
+  isConnected: boolean;
+};

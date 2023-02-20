@@ -10,6 +10,7 @@ import sanitizeHtml from "sanitize-html";
 import { isValidUrl } from "../../utils/validationUrl";
 
 export const FormAnswer = (props: FormType) => {
+  const { isConnected } = props;
   const { childId } = props;
   const dispatch: AppDispatch = useDispatch();
   const isSuccessSend = useSelector(getIsSuccessMessage);
@@ -68,7 +69,6 @@ export const FormAnswer = (props: FormType) => {
   };
   // SendMessage
   const onSendAnswer = (e: React.FormEvent<HTMLFormElement>) => {
-    debugger;
     e.preventDefault();
     //check validation ---
     const pattern = /^[a-zA-Z0-9]+$/;
@@ -212,19 +212,23 @@ export const FormAnswer = (props: FormType) => {
           selectedFile={selectedFile}
         />
         {/*    reCAPTCHA */}
-        <div className="mt2"> 
-        <ReCAPTCHA
-          ref={captchaRef}
-          sitekey={`${process.env.REACT_APP_SITE_KEY_CAPTCHA_ANSWER}`}
-          onChange={onSendToken}
-        />
-        </div> 
+        <div className="mt2">
+          <ReCAPTCHA
+            ref={captchaRef}
+            sitekey={`${process.env.REACT_APP_SITE_KEY_CAPTCHA_ANSWER}`}
+            onChange={onSendToken}
+          />
+        </div>
         {validation.token.length > 0 && (
           <div className="error">{validation.token}</div>
         )}
         {/* button */}
         <div className="text-end">
-          <button type="submit" className="btn btn-primary mt-4">
+          <button
+            disabled={isConnected}
+            type="submit"
+            className="btn btn-primary mt-4"
+          >
             Send answer
           </button>
         </div>
@@ -235,4 +239,5 @@ export const FormAnswer = (props: FormType) => {
 
 type FormType = {
   childId: number;
+  isConnected: boolean;
 };

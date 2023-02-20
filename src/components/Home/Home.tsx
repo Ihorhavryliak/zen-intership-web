@@ -10,13 +10,19 @@ import {
   getCountPageSelector,
 } from "../../redux/PostMessageRedux/post_message_selector";
 import { AppDispatch } from "../../redux/store";
-import { Form } from "../Forms/FormMain";
 import { io } from "socket.io-client";
 import "./Home.css";
 import { Paginator } from "./Paginator";
 import { MainPost } from "./MainPost";
 import { SelectPost } from "./SelectPost";
+import { SocketHook } from "../../hook/SocketHook";
+import {
+  GetAllMessageNewAPIType,
+  SendAnswerType,
+} from "../../api/post_message_api";
+import { FormMain } from "../Forms/FormMain";
 
+const socket = io(`${process.env.REACT_APP_SITE_LISTEN_SOCKET}`);
 
 const Home = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -27,23 +33,37 @@ const Home = () => {
     return () => {};
   }, []);
   //Socket
-  const socket = io(`${process.env.REACT_APP_SITE_LISTEN_SOCKET}`);
-  const [dataWebsocket, setDataWebsocket] = useState();
 
-  useEffect(() => {
-    socket.emit("subscribe", "message");
+  //const [dataWebsocket, setDataWebsocket] = useState();
+
+  const [dataWebsocket, isConnected] = SocketHook("newMessage");
+
+  /*   useEffect(() => {
+ 
     socket.on("newMessage", (data) => {
       setDataWebsocket(data);
     });
+
+    socket.on('connect', () => {
+      setIsConnected(true);
+    });
+
+    socket.on('disconnect', () => {
+      setIsConnected(false);
+    });
     return () => {
+      socket.off('connect');
+      socket.off('disconnect');
       socket.off('newMessage"');
     };
-  }, []);
+  }, []); */
 
   useEffect(() => {
-    if (dataWebsocket) {
-      dispatch(setWebsocket(dataWebsocket));
-    }
+    dispatch(
+      setWebsocket(
+        dataWebsocket as GetAllMessageNewAPIType[] | SendAnswerType[] | []
+      )
+    );
     return () => {};
   }, [dataWebsocket]);
   // isOpenForm
@@ -64,17 +84,19 @@ const Home = () => {
   const onPageSearch = (e: number) => {
     setQuery({ ...query, page: e });
     dispatch(getPostOrderByName(query.name, query.page));
+    window.scrollTo(0, 0);
   };
   //-----------------------
   return (
     <section>
       {/*  form Main*/}
-      <Form />
+      <FormMain isConnected={isConnected as boolean} />
       {/*    select sort */}
       <hr />
       <SelectPost onSendSort={onSendSort} />
       {/* all message */}
       <MainPost
+        isConnected={isConnected as boolean}
         messageAllData={messageAllData}
         onIsOpenForm={onIsOpenForm}
         isOpenForm={isOpenForm.id}
@@ -95,7 +117,11 @@ const Home = () => {
 };
 export default Home;
 
-
 export type ValidationType = {
   size: string;
+};
+
+type DataWebsocketType = {
+  dataWebsocket: GetAllMessageNewAPIType[] | SendAnswerType[] | [];
+  isConnected: boolean;
 };
