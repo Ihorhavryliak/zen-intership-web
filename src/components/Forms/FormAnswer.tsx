@@ -101,8 +101,10 @@ export const FormAnswer = (props: FormType) => {
     if (!isValidUrl(homePage)) {
       return setValidation({ ...validation, homePage: "Not correct url" });
     }
-    if (isVerificationToken === false) {
-      return setValidation({ ...validation, token: "Confirm captcha" });
+    if (userData.length === 0) {
+      if (isVerificationToken === false) {
+        return setValidation({ ...validation, token: "Confirm captcha" });
+      }
     }
     //send ---
     dispatch(sendAnswer(name, email, message, homePage, childId, selectedFile));
@@ -113,13 +115,23 @@ export const FormAnswer = (props: FormType) => {
     setMessage("");
     setSelectedFile([]);
     setPreview([]);
-    setValidation({
-      homePage: "",
-      name: "",
-      email: "",
-      message: "",
-      token: "",
-    });
+    if (userData.length > 0) {
+      setValidation({
+        homePage: "",
+        name: userData[0].email,
+        email: userData[0].name ? userData[0].name : "",
+        message: "",
+        token: "",
+      });
+    } else {
+      setValidation({
+        homePage: "",
+        name: "",
+        email: "",
+        message: "",
+        token: "",
+      });
+    }
   };
   //-----
   return (
@@ -223,14 +235,16 @@ export const FormAnswer = (props: FormType) => {
           selectedFile={selectedFile}
         />
         {/*    reCAPTCHA */}
-        <div className="mt-2">
-          <ReCAPTCHA
-            ref={captchaRef}
-            sitekey={`${process.env.REACT_APP_SITE_KEY_CAPTCHA_ANSWER}`}
-            onChange={onSendToken}
-            theme={"dark"}
-          />
-        </div>
+        {userData.length === 0 && (
+          <div className="mt-2">
+            <ReCAPTCHA
+              ref={captchaRef}
+              sitekey={`${process.env.REACT_APP_SITE_KEY_CAPTCHA_ANSWER}`}
+              onChange={onSendToken}
+              theme={"dark"}
+            />
+          </div>
+        )}
         {validation.token.length > 0 && (
           <div className="error">{validation.token}</div>
         )}

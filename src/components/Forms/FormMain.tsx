@@ -98,9 +98,10 @@ export const FormMain = (props: FormType) => {
     if (!isValidUrl(homePage)) {
       return setValidation({ ...validation, homePage: "Not correct url" });
     }
-
-    if (isVerificationToken === false) {
-      return setValidation({ ...validation, token: "Confirm captcha" });
+    if (userData.length === 0) {
+      if (isVerificationToken === false) {
+        return setValidation({ ...validation, token: "Confirm captcha" });
+      }
     }
     captchaRef.current.reset();
     dispatch(postMessage(name, email, message, homePage, selectedFile));
@@ -112,13 +113,23 @@ export const FormMain = (props: FormType) => {
     setIsVerificationToken(false);
     setSelectedFile([]);
     setPreview([]);
-    setValidation({
-      homePage: "",
-      name: "",
-      email: "",
-      message: "",
-      token: "",
-    });
+    if (userData.length > 0) {
+      setValidation({
+        homePage: "",
+        name: userData[0].email,
+        email: userData[0].name ? userData[0].name : "",
+        message: "",
+        token: "",
+      });
+    } else {
+      setValidation({
+        homePage: "",
+        name: "",
+        email: "",
+        message: "",
+        token: "",
+      });
+    }
   };
   //-----
   return (
@@ -225,13 +236,15 @@ export const FormMain = (props: FormType) => {
           selectedFile={selectedFile}
         />
         {/*    reCAPTCHA */}
-        <ReCAPTCHA
-          ref={captchaRef}
-          sitekey={`${process.env.REACT_APP_SITE_KEY_CAPTCHA}`}
-          onChange={onSendToken}
-          className="my-3"
-          theme={"dark"}
-        />
+        {userData.length === 0 && (
+          <ReCAPTCHA
+            ref={captchaRef}
+            sitekey={`${process.env.REACT_APP_SITE_KEY_CAPTCHA}`}
+            onChange={onSendToken}
+            className="my-3"
+            theme={"dark"}
+          />
+        )}
         {validation.token.length > 0 && (
           <div className="error">{validation.token}</div>
         )}
