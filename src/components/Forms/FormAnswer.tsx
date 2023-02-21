@@ -74,6 +74,10 @@ export const FormAnswer = (props: FormType) => {
       setName(userData[0].name);
       setEmail(userData[0].email);
     }
+
+    return ()=> {
+      captchaRef.current.reset();
+    }
   }, [userData]);
   // SendMessage
   // SendMessage
@@ -105,6 +109,7 @@ export const FormAnswer = (props: FormType) => {
       if (isVerificationToken === false) {
         return setValidation({ ...validation, token: "Confirm captcha" });
       }
+      captchaRef.current.reset();
     }
     //send ---
     dispatch(sendAnswer(name, email, message, homePage, childId, selectedFile));
