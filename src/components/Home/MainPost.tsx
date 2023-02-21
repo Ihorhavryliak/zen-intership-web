@@ -87,7 +87,7 @@ export const MainPost = (props: MainPostType) => {
                 <div className="d-flex justify-content-end">
                   <div className="col-10">
                     {isOpenForm === data.id ? (
-                      <FormAnswer isConnected={isConnected} childId={data.id} />
+                      <FormAnswer childId={data.id} />
                     ) : (
                       ""
                     )}

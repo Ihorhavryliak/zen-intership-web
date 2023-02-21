@@ -35,3 +35,6 @@ body, html {
 .z__index__1200 {
   z-index: 200!important;
 }
+.form-control:disabled, .form-control[readonly] {
+  background-color: #767c846c !important;
+}

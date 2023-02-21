@@ -4,6 +4,6 @@ export const getIsSuccessMessage = (state: AppStateType) => {
   return state.authReducer.isSuccess;
 };
 
-export const getAllMessageDataSelector = (state: AppStateType) => {
-  return state.authReducer.messages;
+export const getUserDataSelector = (state: AppStateType) => {
+  return state.authReducer.user;
 };

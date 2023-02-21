@@ -1,23 +1,18 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { onRegistration } from "../../redux/AuthReducer/Auth_reducer";
+import { login } from "../../redux/AuthReducer/Auth_reducer";
 import { getIsSuccessMessage } from "../../redux/AuthReducer/Auth_selector";
 import { AppDispatch } from "../../redux/store";
 
-export const FormRegister = () => {
+export const FormSighIn = () => {
   const dispatch: AppDispatch = useDispatch();
   const isSuccessSend = useSelector(getIsSuccessMessage);
   const [validation, setValidation] = useState({
-    name: "",
     email: "",
     password: "",
   });
-  const [name, setName] = useState("");
-  const onSetName = (value: string) => {
-    setName(value);
-    setValidation({ ...validation, name: "" });
-  };
+
   const [email, setEmail] = useState("");
   const onSetEmail = (value: string) => {
     setEmail(value);
@@ -33,26 +28,17 @@ export const FormRegister = () => {
   const onSendMessage = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     //check validation ---
-    const pattern = /^[a-zA-Z0-9]+$/;
-    if (!pattern.test(name)) {
-      return setValidation({
-        ...validation,
-        name: "No correct enter name. Example: Bred",
-      });
-    }
     const patternEmail = /^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/;
     if (!patternEmail.test(email)) {
       return setValidation({ ...validation, email: "No valid email" });
     }
-    if (name.length === 0) {
-      return setValidation({ ...validation, name: "Field require" });
-    } else if (email.length === 0) {
+    if (email.length === 0) {
       return setValidation({ ...validation, email: "Field require" });
     } else if (password.length === 0) {
       return setValidation({ ...validation, password: "Field require" });
     }
 
-    dispatch(onRegistration(name, email, password));
+    dispatch(login(email, password));
   };
   //-----//
   return (
@@ -63,18 +49,6 @@ export const FormRegister = () => {
           className="z__index__6 position__relative"
         >
           <h1 className="h1__bold">Sign-up</h1>
-          <div>
-            <input
-              type="text"
-              className="form-control mb-3"
-              placeholder="Your name*"
-              value={name}
-              onChange={(e) => onSetName(e.target.value)}
-            />
-            {validation.name.length > 0 && (
-              <div className="error">{validation.name}</div>
-            )}
-          </div>
           {/* email */}
           <div>
             <input
@@ -108,13 +82,13 @@ export const FormRegister = () => {
           </div>
           {/* error */}
           {isSuccessSend === false && (
-            <div className="error">An error occurred, try again please</div>
+            <div className="error">No correct email or password</div>
           )}
         </form>
       )}
       {isSuccessSend === true && (
         <div className="fs-1">
-          <div className="fs-1">You successfully registered</div>
+          <div className="fs-1">You successfully Sigh in</div>
           <div className="text-center">
             <NavLink to="/" className="btn btn-success">
               Go to home

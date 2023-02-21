@@ -2,9 +2,9 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { cleanAllData } from "../../redux/AuthReducer/Auth_reducer";
 import { AppDispatch } from "../../redux/store";
-import { FormRegister } from "../Forms/FormRegister";
+import { FormSighIn } from "../Forms/FormSighIn";
 
-export const Register = () => {
+export const SighIn = () => {
   const dispatch: AppDispatch = useDispatch();
   useEffect(() => {
     return () => {
@@ -14,7 +14,7 @@ export const Register = () => {
 
   return (
     <div>
-      <FormRegister />
+      <FormSighIn />
     </div>
   );
 };

@@ -6,4 +6,10 @@ const api = axios.create({
   baseURL: API_URL,
 });
 
+api.interceptors.request.use((config) => {
+  // @ts-ignore
+  config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
+  return config;
+});
+
 export default api;

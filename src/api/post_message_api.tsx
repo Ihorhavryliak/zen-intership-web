@@ -8,15 +8,7 @@ export const postMessageAPI = {
     );
     return res.data;
   },
-  //registrationDB
-  async registrationDB(name: string, email: string, password: string) {
-    const res = await api.post<any>("user", {
-      name,
-      email,
-      password,
-    });
-    return res.data;
-  },
+
   // sendAnswerDB
   async postAnswerDB(
     name: string,

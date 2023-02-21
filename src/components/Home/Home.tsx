@@ -10,7 +10,6 @@ import {
   getCountPageSelector,
 } from "../../redux/PostMessageRedux/post_message_selector";
 import { AppDispatch } from "../../redux/store";
-import { io } from "socket.io-client";
 import "./Home.css";
 import { Paginator } from "./Paginator";
 import { MainPost } from "./MainPost";
@@ -22,8 +21,6 @@ import {
 } from "../../api/post_message_api";
 import { FormMain } from "../Forms/FormMain";
 
-const socket = io(`${process.env.REACT_APP_SITE_LISTEN_SOCKET}`);
-
 const Home = () => {
   const dispatch: AppDispatch = useDispatch();
   const messageAllData = useSelector(getAllMessageDataSelector);
@@ -33,30 +30,7 @@ const Home = () => {
     return () => {};
   }, []);
   //Socket
-
-  //const [dataWebsocket, setDataWebsocket] = useState();
-
   const [dataWebsocket, isConnected] = SocketHook("newMessage");
-
-  /*   useEffect(() => {
- 
-    socket.on("newMessage", (data) => {
-      setDataWebsocket(data);
-    });
-
-    socket.on('connect', () => {
-      setIsConnected(true);
-    });
-
-    socket.on('disconnect', () => {
-      setIsConnected(false);
-    });
-    return () => {
-      socket.off('connect');
-      socket.off('disconnect');
-      socket.off('newMessage"');
-    };
-  }, []); */
 
   useEffect(() => {
     dispatch(
@@ -90,7 +64,7 @@ const Home = () => {
   return (
     <section>
       {/*  form Main*/}
-      <FormMain isConnected={isConnected as boolean} />
+      <FormMain />
       {/*    select sort */}
       <hr />
       <SelectPost onSendSort={onSendSort} />

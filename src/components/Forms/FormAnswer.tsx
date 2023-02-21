@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux/es/exports";
@@ -8,12 +8,13 @@ import { AppDispatch } from "../../redux/store";
 import { UploadImg } from "../Home/UploadImg";
 import sanitizeHtml from "sanitize-html";
 import { isValidUrl } from "../../utils/validationUrl";
+import { getUserDataSelector } from "../../redux/AuthReducer/Auth_selector";
 
 export const FormAnswer = (props: FormType) => {
-  const { isConnected } = props;
   const { childId } = props;
   const dispatch: AppDispatch = useDispatch();
   const isSuccessSend = useSelector(getIsSuccessMessage);
+  const userData = useSelector(getUserDataSelector);
   const initialRef: any = null;
   const captchaRef = useRef(initialRef);
   const [validation, setValidation] = useState({
@@ -67,6 +68,14 @@ export const FormAnswer = (props: FormType) => {
     }
     value.preventDefault();
   };
+  //
+  useEffect(() => {
+    if (userData.length > 0) {
+      setName(userData[0].name);
+      setEmail(userData[0].email);
+    }
+  }, [userData]);
+  // SendMessage
   // SendMessage
   const onSendAnswer = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -122,6 +131,7 @@ export const FormAnswer = (props: FormType) => {
         {/*     name */}
         <div>
           <input
+            disabled={userData.length > 0}
             type="text"
             className="form-control mb-3"
             placeholder="Your name*"
@@ -135,6 +145,7 @@ export const FormAnswer = (props: FormType) => {
         {/* email */}
         <div>
           <input
+            disabled={userData.length > 0}
             type="email"
             className="form-control mb-3"
             placeholder="Your e-mail*"
@@ -217,6 +228,7 @@ export const FormAnswer = (props: FormType) => {
             ref={captchaRef}
             sitekey={`${process.env.REACT_APP_SITE_KEY_CAPTCHA_ANSWER}`}
             onChange={onSendToken}
+            theme={"dark"}
           />
         </div>
         {validation.token.length > 0 && (
@@ -224,11 +236,7 @@ export const FormAnswer = (props: FormType) => {
         )}
         {/* button */}
         <div className="text-end">
-          <button
-            disabled={isConnected}
-            type="submit"
-            className="btn btn-primary mt-4"
-          >
+          <button type="submit" className="btn btn-primary mt-4">
             Send answer
           </button>
         </div>
@@ -239,5 +247,4 @@ export const FormAnswer = (props: FormType) => {
 
 type FormType = {
   childId: number;
-  isConnected: boolean;
 };

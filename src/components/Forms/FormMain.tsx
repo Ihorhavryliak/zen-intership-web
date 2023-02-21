@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux/es/exports";
@@ -8,10 +8,11 @@ import { AppDispatch } from "../../redux/store";
 import { UploadImg } from "../Home/UploadImg";
 import sanitizeHtml from "sanitize-html";
 import { isValidUrl } from "../../utils/validationUrl";
+import { getUserDataSelector } from "../../redux/AuthReducer/Auth_selector";
 
 export const FormMain = (props: FormType) => {
-  const { isConnected } = props;
   const dispatch: AppDispatch = useDispatch();
+  const userData = useSelector(getUserDataSelector);
   const isSuccessSend = useSelector(getIsSuccessMessage);
   const initialRef: any = null;
   const captchaRef = useRef(initialRef);
@@ -56,6 +57,7 @@ export const FormMain = (props: FormType) => {
   const [selectedFile, setSelectedFile] = useState([]);
   const [preview, setPreview] = useState([]);
   const [isVerificationToken, setIsVerificationToken] = useState(false);
+
   //send token captcha
   const onSendToken = (value: any) => {
     if (value) {
@@ -64,6 +66,13 @@ export const FormMain = (props: FormType) => {
     }
     value.preventDefault();
   };
+  //
+  useEffect(() => {
+    if (userData.length > 0) {
+      setName(userData[0].name);
+      setEmail(userData[0].email);
+    }
+  }, [userData]);
   // SendMessage
   const onSendMessage = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -122,6 +131,7 @@ export const FormMain = (props: FormType) => {
         {/*     name */}
         <div>
           <input
+            disabled={userData.length > 0}
             type="text"
             className="form-control mb-3"
             placeholder="Your name*"
@@ -135,6 +145,7 @@ export const FormMain = (props: FormType) => {
         {/* email */}
         <div>
           <input
+            disabled={userData.length > 0}
             type="email"
             className="form-control mb-3"
             placeholder="Your e-mail*"
@@ -219,21 +230,18 @@ export const FormMain = (props: FormType) => {
           sitekey={`${process.env.REACT_APP_SITE_KEY_CAPTCHA}`}
           onChange={onSendToken}
           className="my-3"
+          theme={"dark"}
         />
         {validation.token.length > 0 && (
           <div className="error">{validation.token}</div>
         )}
         {/* button */}
         <div className="text-end">
-          <button disabled={isConnected} className="btn btn-primary mt-4">
-            Send message
-          </button>
+          <button className="btn btn-primary mt-4">Send message</button>
         </div>
       </form>
     </>
   );
 };
 
-type FormType = {
-  isConnected: boolean;
-};
+type FormType = {};
