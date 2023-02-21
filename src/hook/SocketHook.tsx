@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import io from "socket.io-client";
 import {
   GetAllMessageNewAPIType,
@@ -8,6 +9,7 @@ import {
 const socket = io(`${process.env.REACT_APP_SITE_LISTEN_SOCKET}`);
 
 export function SocketHook(connectName: string) {
+  const location = useLocation()
   const [isConnected, setIsConnected] = useState(socket.connected);
   const [dataWebsocket, setDataWebsocket] = useState<
     GetAllMessageNewAPIType[] | SendAnswerType[] | []
@@ -33,7 +35,7 @@ export function SocketHook(connectName: string) {
       socket.off("disconnect");
       socket.off("pong");
     };
-  }, []);
+  }, [location.pathname]);
 
   return [dataWebsocket, isConnected];
 }

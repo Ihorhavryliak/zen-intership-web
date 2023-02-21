@@ -8,6 +8,7 @@ The Message App is a web-based platform that allows users to leave comments on a
 
 # Front-end
 ## Getting Started:
+`Recommended using the operating system Windows.`
 To get started with the Message App, follow these steps:
 1. Clone the repository
 2. In the terminal enter the command `npm i`
@@ -19,7 +20,7 @@ To get started with the Message App, follow these steps:
 4. `REACT_APP_SITE_KEY_CAPTCHA_ANSWER =  ` ""; //key captcha answer form. Example `=6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI`
 
 ## Create a user (require):
-1. Register a user on this example page url:  `http://localhost:3000/sign-up` (when you connect base Data)
+1. Register a user on this example page url:  `http://localhost:3000/sign-up`. Do it before as you can send post. (when you connect base Data)
 
 ## Run
 1. Run  by running `npm start` in the project directory

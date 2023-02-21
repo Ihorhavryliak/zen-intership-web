@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import {  useState } from "react";
 import { useDispatch } from "react-redux";
 import { onRegistration } from "../../redux/AuthReducer/Auth_reducer";
 import { AppDispatch } from "../../redux/store";
@@ -7,9 +7,6 @@ type FormRegister = {};
 
 export const FormRegister = (props: FormRegister) => {
   const dispatch: AppDispatch = useDispatch();
-  //const isSuccessSend = useSelector(getIsSuccessMessage);
-  const initialRef: any = null;
-  const captchaRef = useRef(initialRef);
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
