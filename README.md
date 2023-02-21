@@ -33,6 +33,10 @@ User Comments: Users can leave comments on the website, which are saved to a rel
 
 User Answer: Users can leave answer on comments on the website, which are saved to a relational database.
 
+User Sigh-in: User can Sigh-in and leave posts.
+
+User Sigh-up: User can Sigh-up and leave posts.
+
 Comment Sorting: The app provides the ability to sort comments by User Name, E-mail, and date added (in both ascending and descending order).
 
 Pagination: Comments are displayed in groups of 25 per page.
