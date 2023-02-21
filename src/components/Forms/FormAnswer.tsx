@@ -75,9 +75,6 @@ export const FormAnswer = (props: FormType) => {
       setEmail(userData[0].email);
     }
 
-    return ()=> {
-      captchaRef.current.reset();
-    }
   }, [userData]);
   // SendMessage
   // SendMessage

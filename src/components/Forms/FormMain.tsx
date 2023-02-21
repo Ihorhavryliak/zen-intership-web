@@ -73,9 +73,6 @@ export const FormMain = (props: FormType) => {
       setEmail(userData[0].email);
     }
 
-    return ()=> {
-      captchaRef.current.reset();
-    }
   }, [userData]);
   // SendMessage
   const onSendMessage = (e: React.FormEvent<HTMLFormElement>) => {
