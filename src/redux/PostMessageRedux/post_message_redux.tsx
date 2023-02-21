@@ -112,7 +112,7 @@ export const setWebsocket =
   (data: GetAllMessageNewAPIType[] | SendAnswerType[] | []): ThunkType =>
   async (dispatch) => {
     try {
-      if (!data[0].childId && data[0].childId === null) {
+      if (data.length > 0 && !data[0].childId && data[0].childId === null) {
         dispatch(actions.setPost(data[0] as GetAllMessageNewAPIType));
       } else {
         dispatch(actions.setNewAnswerData(data[0])); //TO DO

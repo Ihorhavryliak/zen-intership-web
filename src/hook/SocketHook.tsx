@@ -11,7 +11,7 @@ const socket = io(`${process.env.REACT_APP_SITE_LISTEN_SOCKET}`);
 export function SocketHook(connectName: string) {
   const location = useLocation();
   const [isConnected, setIsConnected] = useState(socket.connected);
-  console.log(isConnected, "isConnected");
+
   const [dataWebsocket, setDataWebsocket] = useState<
     GetAllMessageNewAPIType[] | SendAnswerType[] | []
   >([]);

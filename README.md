@@ -22,6 +22,16 @@ To get started with the Message App, follow these steps:
 ## Create a user (require):
 1. Register a user on this example page url:  `http://localhost:3000/sign-up`. Do it before as you can send post. (when you connect base Data)
 
+## file `.env` with variables:
+
+`REACT_APP_SITE_SERVER_URL=http://localhost:4000/`
+
+`REACT_APP_SITE_LISTEN_SOCKET=http://localhost:4000/events`
+
+`REACT_APP_SITE_KEY_CAPTCHA = 6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI`
+
+`REACT_APP_SITE_KEY_CAPTCHA_ANSWER = 6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI`
+
 ## Run
 1. Run  by running `npm start` in the project directory
 2. Go to back-end repo:  [back-end repo](https://github.com/Ihorhavryliak/zen-internship-server)

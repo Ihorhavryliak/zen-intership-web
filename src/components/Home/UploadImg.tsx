@@ -54,7 +54,7 @@ export const UploadImg = (props: UploadPortfolioPhotoType) => {
     setSelectedFile([]);
     setValidation({ size: "" });
   };
-  console.log(preview, "preview");
+
   return (
     <div >
       <div >
