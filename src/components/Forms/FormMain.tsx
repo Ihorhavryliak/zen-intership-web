@@ -108,30 +108,25 @@ export const FormMain = (props: FormType) => {
   
     dispatch(postMessage(name, email, message, homePage, selectedFile));
     /* clean */
-    setName("");
-    setEmail("");
     setHomePage("");
     setMessage("");
     setIsVerificationToken(false);
     setSelectedFile([]);
     setPreview([]);
     if (userData.length > 0) {
-      setValidation({
-        homePage: "",
-        name: userData[0].email,
-        email: userData[0].name ? userData[0].name : "",
-        message: "",
-        token: "",
-      });
+      setName(userData[0].name ? userData[0].name : "");
+      setEmail(userData[0].email);
     } else {
-      setValidation({
-        homePage: "",
-        name: "",
-        email: "",
-        message: "",
-        token: "",
-      });
+      setName("");
+      setEmail("");
     }
+    setValidation({
+      homePage: "",
+      name: "",
+      email: "",
+      message: "",
+      token: "",
+    });
   };
   //-----
   return (
