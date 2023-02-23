@@ -57,7 +57,7 @@ const Home = () => {
   };
   const onPageSearch = (e: number) => {
     setQuery({ ...query, page: e });
-    dispatch(getPostOrderByName(query.name, query.page));
+    dispatch(getPostOrderByName(query.name, e));
     window.scrollTo(0, 0);
   };
   //-----------------------
