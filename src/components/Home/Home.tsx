@@ -50,13 +50,12 @@ const Home = () => {
     }
   };
   // sort search
-  const [query, setQuery] = useState({ page: 0, limit: 25, name: "" });
+  const [query, setQuery] = useState({ page: 1, limit: 25, name: "" });
 
   const onSendSort = (name: string) => {
     dispatch(getPostOrderByName(name, query.page));
   };
   const onPageSearch = (e: number) => {
-    e = e +1
     setQuery({ ...query, page: e });
     dispatch(getPostOrderByName(query.name, query.page));
     window.scrollTo(0, 0);
