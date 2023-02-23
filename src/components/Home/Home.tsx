@@ -81,7 +81,7 @@ const Home = () => {
           <Paginator
             total_count={countItems}
             setCurrentPage={onPageSearch}
-            currentPage={query.page}
+            currentPage={query.page + 1}
             itemsPerPage={query.limit}
           />
         )}
