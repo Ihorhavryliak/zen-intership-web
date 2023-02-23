@@ -56,6 +56,7 @@ const Home = () => {
     dispatch(getPostOrderByName(name, query.page));
   };
   const onPageSearch = (e: number) => {
+    e = e +1
     setQuery({ ...query, page: e });
     dispatch(getPostOrderByName(query.name, query.page));
     window.scrollTo(0, 0);
@@ -81,7 +82,7 @@ const Home = () => {
           <Paginator
             total_count={countItems}
             setCurrentPage={onPageSearch}
-            currentPage={query.page + 1}
+            currentPage={query.page}
             itemsPerPage={query.limit}
           />
         )}
